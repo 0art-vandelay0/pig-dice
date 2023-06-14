@@ -35,23 +35,28 @@ function DiceRoll() {
     this.numbers = [1, 2, 3, 4, 5, 6];
 };
 
-DiceRoll.prototype.roll = function () {
-    return this.numbers[Math.floor(Math.random() * this.numbers.length)];
+DiceRoll.prototype.roll = function (prevScore = 0) {
+    let number = this.numbers[Math.floor(Math.random() * this.numbers.length)];
+    let newTotal = prevScore + number;
+    return newTotal;
 };
 
 function PointTally () {
     this.points = 0;
 }
 
-PointTally.prototype.tallyPoints = function () {
-    const diceRoll = new DiceRoll();
-    const point = diceRoll.roll();
-    this.points += point;
+PointTally.prototype.tallyPoints = function (rolls) {
+    let diceRoll = new DiceRoll();
+    for ( let i = 0; i < rolls; i++) {
+        let point = diceRoll.roll();
+        this.points += point;
+    }
     return this.points;
 }
 
 const pointTally1 = new PointTally()
 const pointTally2 = new PointTally()
+
 const result1 = pointTally1.tallyPoints();
 const result2 = pointTally2.tallyPoints();
 console.log(pointTally1);
@@ -59,29 +64,36 @@ console.log(pointTally2);
 console.log(result1);
 
 
-// UI Logic
-function handleFormSubmit(event) {
-    event.preventDefault();
-}
+// // UI Logic
+// function rollTheDice() {
+//     let newRoll = new DiceRoll();
+//     let result = newRoll.roll();
+//     document.getElementById("roll-result").append(result);
+// }
 
-window.addEventListener("load", function () {
-    this.document.querySelector("form#form-name").addEventListener("submit", handleFormSubmit);
-}
+// function handleFormSubmit(event) {
+//     event.preventDefault();
+// }
+
+// window.addEventListener("load", function () {
+//     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmit);
+//     document.querySelector("button#roll-button").addEventListener("click", rollTheDice);
+// });
 
 
 
-// console.log(result2);
+// // console.log(result2);
 
-// const diceRoll = new DiceRoll();
-// const result = diceRoll.roll();
-// console.log(result);
+// // const diceRoll = new DiceRoll();
+// // const result = diceRoll.roll();
+// // console.log(result);
 
 
-// let player1 = new Player("Casey");
-// let player2 = new Player("Lindsay");
-// let playerlist = new PlayerList();
-// playerlist.addPlayer(player1);
-// playerlist.addPlayer(player2);
+// // let player1 = new Player("Casey");
+// // let player2 = new Player("Lindsay");
+// // let playerlist = new PlayerList();
+// // playerlist.addPlayer(player1);
+// // playerlist.addPlayer(player2);
 
-// console.log(playerlist.players)
+// // console.log(playerlist.players)
 
