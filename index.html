@@ -9,18 +9,21 @@
 </head>
 
 <body>
-    <form id="name-form">
-        <label id="player1label">Enter player 1 name:</label>
-        <input type="text" id="player1" name="name">
-        <label id="player2label">Enter player 2 name:</label>
-        <input type="text" id="player2" name="name">
-        <button id="submit-button">Submit</button>
-    </form>
+    <div id="div-form">
+        <form id="name-form">
+            <label id="player1label">Enter player 1 name:</label>
+            <input type="text" id="player1" name="name">
+            <label id="player2label">Enter player 2 name:</label>
+            <input type="text" id="player2" name="name">
+            <button id="submit-button">Submit</button>
+        </form>
+    </div>
     <div>
         <p id="welcome-output"></p>
     </div>
-    <button id="roll-button1">Roll</button>
-    <div id="roll-result" class="hidden">
+    <button id="roll-button">Roll</button>
+    <div id="roll-result">
+        <p id="roll-output"></p>
     </div>
 </body>
 
