@@ -61,22 +61,28 @@ Player.prototype.diceRoll = function (prevScore = 0){
 
 // UI Logic
 function handleFormSubmission(event){
-event.preventDefault();
+    event.preventDefault();
+
+    let player1name = document.getElementById("player1").value;
+    let player2name = document.getElementById("player2").value;
+    let welcomeOutput = document.getElementById("welcome-output");
+    welcomeOutput.append("Welcome " + player1name + " and " + player2name + " to the game of Pig Dice! The first player to reach 100 points wins! Player 1 roll the dice to start the game!");
 }
 
 window.addEventListener("load", function(){
     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
-    document.querySelector("button#roll-button").addEventListener("click", diceRoll);
-    document.getElementById("span#roll-result").innerText = newTotal;
-    this.document.getElementById("span#roll-result").innerText = newTotal;
+
+    // document.querySelector("button#roll-button").addEventListener("click", diceRoll);
+    // document.getElementById("span#roll-result").innerText = newTotal;
+    // this.document.getElementById("span#roll-result").innerText = newTotal;
 })
 
 
-PL = new PlayerList();
-c = new Player("C");
-l = new Player("L");
-PL.addPlayer(c);
-PL.addPlayer(l);
+// PL = new PlayerList();
+// c = new Player("C");
+// l = new Player("L");
+// PL.addPlayer(c);
+// PL.addPlayer(l);
 // c.diceRoll();
 // console.log(c.points);
 // c.diceRoll();
