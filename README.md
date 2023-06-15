@@ -18,7 +18,7 @@ Function
 
 Roll
 Hold
-Start Over
+Start Game
 Point Tally
 Tests
 Describe: Player()

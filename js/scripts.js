@@ -4,6 +4,11 @@ function PlayerList() {
     this.currentId = 0;
 };
 
+PlayerList.prototype.startGame = function () {
+    this.players[0].currentTurn = true;
+    this.players[1].currentTurn = false;
+};
+
 PlayerList.prototype.assignId = function() {
     this.currentId += 1;
     return this.currentId;
@@ -25,6 +30,17 @@ PlayerList.prototype.findPlayer = function (id) {
 function Player(name){
     this.name = name;
     this.points = [];
+    this.currentTurn = true;
+};
+
+PlayerList.prototype.holdRoll = function(){
+    if ((this.players[0].currentTurn = true) && (this.players[1].currentTurn = false)) {
+        this.players[0].currentTurn = false;
+        this.players[1].currentTurn = true;
+    } else if ((this.players[0].currentTurn = false) && (this.players[1].currentTurn = true)) {
+        this.players[0].currentTurn = true;
+        this.players[1].currentTurn = false;
+    }
 };
 
 Player.prototype.diceRoll = function (prevScore = 0){
@@ -43,24 +59,26 @@ Player.prototype.diceRoll = function (prevScore = 0){
 };
 
 
-// // UI Logic
-// function handleFormSubmission(event){
-// event.preventDefault();
-// }
+// UI Logic
+function handleFormSubmission(event){
+event.preventDefault();
+}
 
-// window.addEventListener("load", function(){
-//     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
-//     document.querySelector("button#roll-button").addEventListener("click", diceRoll);
-//     document.getElementById("span#roll-result").innerText = newTotal;
-//     this.document.getElementById("span#roll-result").innerText = newTotal;
-// })
+window.addEventListener("load", function(){
+    document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
+    document.querySelector("button#roll-button").addEventListener("click", diceRoll);
+    document.getElementById("span#roll-result").innerText = newTotal;
+    this.document.getElementById("span#roll-result").innerText = newTotal;
+})
 
 
 PL = new PlayerList();
 c = new Player("C");
+l = new Player("L");
 PL.addPlayer(c);
-c.diceRoll();
-console.log(c.points);
-c.diceRoll();
-console.log(c.points);
-console.log(PL.players);
+PL.addPlayer(l);
+// c.diceRoll();
+// console.log(c.points);
+// c.diceRoll();
+// console.log(c.points);
+// console.log(PL.players);
