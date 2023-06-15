@@ -59,22 +59,30 @@ Player.prototype.diceRoll = function (prevScore = 0){
 };
 
 
+
 // UI Logic
 function handleFormSubmission(event){
     event.preventDefault();
 
     let player1name = document.getElementById("player1").value;
     let player2name = document.getElementById("player2").value;
+    let player1 = new Player(player1name);
+    let player2 = new Player(player2name);
+    // console.log(player1);
+    // console.log(player2);
     let welcomeOutput = document.getElementById("welcome-output");
     welcomeOutput.append("Welcome " + player1name + " and " + player2name + " to the game of Pig Dice! The first player to reach 100 points wins! Player 1 roll the dice to start the game!");
+
+    let rollOutput = document.getElementById("roll-output");
+    rollOutput.append(player1.diceRoll.value);
 }
 
 window.addEventListener("load", function(){
     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
 
-    // document.querySelector("button#roll-button").addEventListener("click", diceRoll);
+    document.querySelector("button#roll-button").addEventListener("click", Player.diceRoll);
+
     // document.getElementById("span#roll-result").innerText = newTotal;
-    // this.document.getElementById("span#roll-result").innerText = newTotal;
 })
 
 
