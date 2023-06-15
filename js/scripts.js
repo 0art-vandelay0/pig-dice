@@ -21,17 +21,21 @@ PlayerList.prototype.findPlayer = function (id) {
 };
 
 PlayerList.prototype.startGame = function () {
-    this.players[0].currentTurn = true;
-    this.players[1].currentTurn = false;
+    this.players[1].currentTurn = true;
+    this.players[2].currentTurn = false;
+    console.log(this.players[1].currentTurn);
+    console.log(this.players[2].currentTurn);
 };
 
-PlayerList.prototype.holdRoll = function(){
-    if ((this.players[0].currentTurn = true) && (this.players[1].currentTurn = false)) {
-        this.players[0].currentTurn = false;
-        this.players[1].currentTurn = true;
-    } else if ((this.players[0].currentTurn = false) && (this.players[1].currentTurn = true)) {
-        this.players[0].currentTurn = true;
+PlayerList.prototype.holdRoll = function() {
+    if ((this.players[1].currentTurn)) {
         this.players[1].currentTurn = false;
+        this.players[2].currentTurn = true;
+        return this.players[2];
+    } else {
+        this.players[1].currentTurn = true;
+        this.players[2].currentTurn = false;
+        return this.players[1];
     }
 };
 
@@ -39,7 +43,7 @@ PlayerList.prototype.holdRoll = function(){
 function Player(name){
     this.name = name;
     this.points = [];
-    // this.currentTurn = true;
+    this.currentTurn = true;
 };
 
 Player.prototype.diceRoll = function (prevScore = 0){
@@ -59,35 +63,47 @@ Player.prototype.diceRoll = function (prevScore = 0){
 
 
 //UI Logic
+
 function handleFormSubmission(event){
     event.preventDefault();
     let player1Name = document.getElementById("player1").value;
-    console.log(player1Name);
+    // console.log(player1Name);
     let player2Name = document.getElementById("player2").value;
-    console.log(player2Name);
+    // console.log(player2Name);
     let player1 = new Player(player1Name);
-    console.log(player1)
+    // console.log(player1)
     let player2 = new Player(player2Name);
-    console.log(player2);
+    // console.log(player2);
+    let playerList = new PlayerList();
+
+    playerList.addPlayer(player1);
+    playerList.addPlayer(player2);
+
+    playerList.startGame();
+
     let welcomeOutput = document.getElementById("welcome-output"); 
     welcomeOutput.append("Welcome " + player1Name + " and " + player2Name + " to the game of Pig Dice! The first player to reach 100 points wins! " + player1Name + ", roll the dice to start the game.")
 
-    // let rollArray = document.getElementById("roll-array-output");
-    // rollArray.innerText = (player1.points);
-
+    let currentPlayer = playerList.players[playerList.currentId];
 
     function handleRollClick () {
         let rollOutput = document.getElementById("roll-output");
-        rollOutput.innerText = (player1.diceRoll())
+        rollOutput.innerText = (currentPlayer.diceRoll())
         let rollArray = document.getElementById("roll-array-output");
-        rollArray.innerText = player1.points.join(", ");
+        rollArray.innerText = currentPlayer.points.join(", ");
         // for (let i = 0; i <player1.points.length; i++){
     }
     document.querySelector("button#roll-button").addEventListener("click", handleRollClick);
-}
 
-function handleHoldClick () {
-    
+    function handleHoldClick () {
+        console.log("Hold button clicked");
+        console.log(currentPlayer);
+        currentPlayer = playerList.holdRoll()
+        console.log(currentPlayer);
+    }
+    document.querySelector("button#hold-button").addEventListener("click", handleHoldClick);
+
+    console.log(currentPlayer);
 }
 
 
