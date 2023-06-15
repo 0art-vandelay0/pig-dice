@@ -80,8 +80,9 @@ function handleFormSubmission(event){
         let rollOutput = document.getElementById("roll-output");
         rollOutput.innerText = (player1.diceRoll())
         let rollArray = document.getElementById("roll-array-output");
-        rollArray.innerText = player1.points;
-    } 
+        rollArray.innerText = player1.points.join(", ");
+        // for (let i = 0; i <player1.points.length; i++){
+    }
     document.querySelector("button#roll-button").addEventListener("click", handleRollClick);
 }
 
