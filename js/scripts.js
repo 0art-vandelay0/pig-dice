@@ -54,16 +54,16 @@ PointTally.prototype.tallyPoints = function (rolls) {
 }
 
 
-// // UI Logic
-// function handleFormSubmission(event){
-// event.preventDefault();
-// }
+// UI Logic
+function handleFormSubmission(event){
+event.preventDefault();
+}
 
-// window.addEventListener("load", function(){
-//     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
-//     document.querySelector("button#roll-button").addEventListener("click", diceRoll);
-//     // document.querySelector("span#roll-result").innerHTML = newTotal;
-// })
+window.addEventListener("load", function(){
+    document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
+    document.querySelector("button#roll-button").addEventListener("click", diceRoll);
+    document.getElementById("span#roll-result").innerText = newTotal;
+})
 
 
 
