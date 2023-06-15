@@ -21,7 +21,7 @@ Hold
 Start Over
 Point Tally
 Tests
-Describe: Create Player
+Describe: Player()
 Test 1: It should assign a player name that is the same as the inputted name. Code: const name = (Lindsay) Expected Output: Player {name: Lindsay}
 
 Test 2: It will assign points and an ID to a player. Code: const name = "Lindsay" Expected Output: expected output = Player{name: Lindsay, points: 0, id: 1}

@@ -42,36 +42,25 @@ Player.prototype.diceRoll = function (prevScore = 0){
     return newTotal;
 };
 
-// Biz Logic for PointTally
 
-PointTally.prototype.tallyPoints = function (rolls) {
-    let diceRoll = new DiceRoll();
-    for ( let i = 0; i < rolls; i++) {
-        let point = diceRoll.roll();
-        this.points += point;
-    }
-    return this.points;
-}
+// // UI Logic
+// function handleFormSubmission(event){
+// event.preventDefault();
+// }
 
-
-// UI Logic
-function handleFormSubmission(event){
-event.preventDefault();
-}
-
-window.addEventListener("load", function(){
-    document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
-    document.querySelector("button#roll-button").addEventListener("click", diceRoll);
-    document.getElementById("span#roll-result").innerText = newTotal;
-})
+// window.addEventListener("load", function(){
+//     document.querySelector("form#name-form").addEventListener("submit", handleFormSubmission);
+//     document.querySelector("button#roll-button").addEventListener("click", diceRoll);
+//     document.getElementById("span#roll-result").innerText = newTotal;
+//     this.document.getElementById("span#roll-result").innerText = newTotal;
+// })
 
 
-
-const pointTally1 = new PointTally()
-const pointTally2 = new PointTally()
-
-const result1 = pointTally1.tallyPoints();
-const result2 = pointTally2.tallyPoints();
-console.log(pointTally1);
-console.log(pointTally2);
-console.log(result1);
+PL = new PlayerList();
+c = new Player("C");
+PL.addPlayer(c);
+c.diceRoll();
+console.log(c.points);
+c.diceRoll();
+console.log(c.points);
+console.log(PL.players);
