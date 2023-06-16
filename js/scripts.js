@@ -27,32 +27,38 @@ PlayerList.prototype.startGame = function () {
     console.log(this.players[2].currentTurn);
 };
 
-// Business logic for Player
-function Player(name) {
+PlayerList.prototype.holdRoll = function() {
+    if ((this.players[1].currentTurn)) {
+        this.players[1].currentTurn = false;
+        this.players[2].currentTurn = true;
+        return this.players[2];
+    } else {
+        this.players[1].currentTurn = true;
+        this.players[2].currentTurn = false;
+        return this.players[1];
+    }
+};
+
+//Business logic for Player
+function Player(name){
     this.name = name;
     this.points = [];
     this.currentTurn = true;
-    this.turnScore = 0; // Add turnScore property
-  }
-  
-  Player.prototype.diceRoll = function (prevScore = 0) {
-    const numbers = [1, 2, 3, 4, 5, 6];
+};
+
+Player.prototype.diceRoll = function (prevScore = 0){
+    const numbers = [1,2,3,4,5,6];
     let number = numbers[Math.floor(Math.random() * numbers.length)];
     console.log(number);
-  
-    // Increment turnScore for the current player
-    this.turnScore += number;
-  
-    let newTotal = prevScore + this.turnScore;
+    let talliedNumbers = this.points;
+    talliedNumbers.push(number);
+    console.log(talliedNumbers);
+    let newTotal = 0;
+    for (let i = 0; i < talliedNumbers.length; i++){
+        newTotal += talliedNumbers[i];
+    }
     return newTotal;
-  };
-  
-  Player.prototype.holdRoll = function () {
-    this.points.push(this.turnScore); // Add turnScore to points
-    this.turnScore = 0; // Reset turnScore to zero
-    return this.points.reduce((total, score) => total + score, 0);
-  };
-  
+};
 
 
 
@@ -85,11 +91,11 @@ function handleFormSubmission(event){
         rollOutput.innerText = (currentPlayer.diceRoll())
         let rollArray = document.getElementById("roll-array-output");
         rollArray.innerText = currentPlayer.points.join(", ");
-        for (let i = 0; i < currentPlayer.points.length; i++) {
-            let rollOutput = document.createElement("div");
-            rollOutput.textContent = "Roll " + (i + 1) + " = " + currentPlayer.points[i];
-            rollArray.append(rollOutput);
-        }
+        // for (let i = 0; i < currentPlayer.points.length; i++) {
+        //     let rollOutput = document.createElement("div");
+        //     rollOutput.textContent = "Roll " + (i + 1) + " = " + currentPlayer.points[i];
+        //     rollArray.append(rollOutput);
+        // }
     }
     document.querySelector("button#roll-button").addEventListener("click", handleRollClick);
 
